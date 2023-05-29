@@ -3,12 +3,12 @@
   "name": "SliceAndDice",
   "icons": [
     {
-      "src": "faviconPizza.ico",
+      "src": "faviconPizzaa.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "faviconPizza.png",
+      "src": "faviconPizzaa.png",
       "type": "image/png",
       "sizes": "192x192"
     }

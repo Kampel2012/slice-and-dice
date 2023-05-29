@@ -10,7 +10,7 @@ const Header = (props) => {
           <img
             src={headerLogo}
             alt="логотип компании"
-            className="w-10 h-10 mr-4 self-center"
+            className="w-14 h-14 mr-4 self-center"
           />
           <div>
             <h1 className="text-2xl font-extrabold">SLISE AND DICE</h1>
