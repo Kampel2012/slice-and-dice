@@ -35,7 +35,7 @@ const Cart = (props) => {
           <button
             type="button"
             disabled="disabled"
-            className="px-9к py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
+            className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
           >
             <span className="mr-2">&#10094;</span> Вернуться назад
           </button>
