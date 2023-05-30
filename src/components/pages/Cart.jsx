@@ -8,7 +8,7 @@ const Cart = (props) => {
   return (
     <>
       <Header />
-      <div className="min-h-screen max-w-[820px] mx-auto mt-24 ">
+      <div className="min-h-screen max-w-[820px] mx-auto mt-20 ">
         <div className="flex flex-wrap justify-between pb-7">
           <div className="flex flex-wrap gap-x-3">
             <img src={shoppingCartIcon} alt="Иконка продуктовой корзины" />
@@ -35,13 +35,13 @@ const Cart = (props) => {
           <button
             type="button"
             disabled="disabled"
-            className="px-6 py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
+            className="px-9к py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
           >
             <span className="mr-2">&#10094;</span> Вернуться назад
           </button>
           <button
             type="button"
-            className="px-6 py-4 bg-orange-600 font-bold text-white rounded-full"
+            className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full"
           >
             Оплатить сейчас
           </button>
