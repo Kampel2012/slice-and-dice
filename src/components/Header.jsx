@@ -1,8 +1,11 @@
 import React from 'react';
 import headerLogo from '../images/logoHeader.png';
 import cartLogo from '../images/shopping-cart.svg';
+import { useLocation } from 'react-router-dom';
 
 const Header = (props) => {
+  const location = useLocation();
+
   return (
     <div className="flex justify-between h-36 border-b shadow">
       <div className="container mx-auto flex justify-between">
@@ -19,14 +22,16 @@ const Header = (props) => {
             </p>
           </div>
         </div>
-        <div className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3">
-          <div className="self-center">520 ₽</div>
-          <p className="self-center  opacity-25 text-2xl">|</p>
-          <div className="self-center flex">
-            <img src={cartLogo} alt="Иконка корзины" />
-            <span className="ml-1">3</span>
+        {location.pathname !== '/cart' && (
+          <div className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3">
+            <div className="self-center">520 ₽</div>
+            <p className="self-center  opacity-25 text-2xl">|</p>
+            <div className="self-center flex">
+              <img src={cartLogo} alt="Иконка корзины" />
+              <span className="ml-1">3</span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

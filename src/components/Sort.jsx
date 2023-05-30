@@ -26,7 +26,7 @@ const Sort = (props) => {
         <SelectBtn textBtn={'Острые'} isActive={false} />
         <SelectBtn textBtn={'Закрытые'} isActive={false} />
       </div>
-      <div className="text-sm font-bold self-center flex flex-wrap">
+      <div className="text-sm font-bold self-center flex-wrap hidden lg:flex">
         ▲ Сортировка по:{' '}
         <div className="relative group">
           <div className="text-orange-600 border-dashed font-normal border-b border-b-orange-600 hover:cursor-pointer ml-1 mb-2 w-24">
