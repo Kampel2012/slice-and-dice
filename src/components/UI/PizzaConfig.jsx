@@ -13,7 +13,7 @@ const PizzaConfig = ({ id }) => {
   }
 
   const defaultStyles =
-    'text-center py-2 text-sm font-bold rounded-md transition';
+    'text-center py-2 text-sm font-bold rounded-md transition cursor-pointer';
 
   const activeStyles = defaultStyles + 'shadow bg-white';
 

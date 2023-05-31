@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 
 const Header = (props) => {
   const location = useLocation();
+  const notACart =
+    location.pathname !== '/cart' && location.pathname !== '/emptycart';
 
   return (
     <div className="flex justify-between h-36 border-b shadow">
@@ -22,7 +24,7 @@ const Header = (props) => {
             </p>
           </div>
         </div>
-        {location.pathname !== '/cart' && (
+        {notACart && (
           <div className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3">
             <div className="self-center">520 ₽</div>
             <p className="self-center  opacity-25 text-2xl">|</p>

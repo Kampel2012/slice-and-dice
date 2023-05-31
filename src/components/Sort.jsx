@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SelectBtn from './UI/SelectBtn';
 
 // TODO прописать красивое выпадающее меню
 
@@ -17,42 +16,32 @@ const Sort = (props) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between">
-      <div className="flex gap-2 my-10 flex-wrap">
-        <SelectBtn textBtn={'Все'} isActive={true} />
-        <SelectBtn textBtn={'Мясные'} isActive={false} />
-        <SelectBtn textBtn={'Вегетарианская'} isActive={false} />
-        <SelectBtn textBtn={'Гриль'} isActive={false} />
-        <SelectBtn textBtn={'Острые'} isActive={false} />
-        <SelectBtn textBtn={'Закрытые'} isActive={false} />
-      </div>
-      <div className="text-sm font-bold self-center flex-wrap hidden lg:flex">
-        ▲ Сортировка по:{' '}
-        <div className="relative group">
-          <div className="text-orange-600 border-dashed font-normal border-b border-b-orange-600 hover:cursor-pointer ml-1 mb-2 w-24">
-            {sort}
-          </div>
-          <ul className="overflow-hidden absolute cursor-pointer right-0 top-7 group-hover:py-2 shadow rounded-lg font-normal text-sm group-hover:h-min w-32 h-0">
-            <li
-              className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
-              onClick={onSwitchPopular}
-            >
-              популярности
-            </li>
-            <li
-              className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
-              onClick={onSwitchPrice}
-            >
-              цене
-            </li>
-            <li
-              className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
-              onClick={onSwitchAlf}
-            >
-              алфавиту
-            </li>
-          </ul>
+    <div className="text-sm font-bold self-center flex-wrap hidden lg:flex">
+      ▲ Сортировка по:{' '}
+      <div className="relative group">
+        <div className="text-orange-600 border-dashed font-normal border-b border-b-orange-600 hover:cursor-pointer ml-1 mb-2 w-24">
+          {sort}
         </div>
+        <ul className="overflow-hidden absolute cursor-pointer right-0 top-7 group-hover:py-2 shadow rounded-lg font-normal text-sm group-hover:h-min w-32 h-0">
+          <li
+            className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
+            onClick={onSwitchPopular}
+          >
+            популярности
+          </li>
+          <li
+            className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
+            onClick={onSwitchPrice}
+          >
+            цене
+          </li>
+          <li
+            className="hover:bg-orange-600 hover:bg-opacity-5 hover:font-bold hover:text-orange-600 px-2 py-2"
+            onClick={onSwitchAlf}
+          >
+            алфавиту
+          </li>
+        </ul>
       </div>
     </div>
   );

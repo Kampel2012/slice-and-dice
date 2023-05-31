@@ -6,9 +6,9 @@ import ProductInCart from '../ProductInCart';
 
 const Cart = (props) => {
   return (
-    <>
+    <div className="h-screen">
       <Header />
-      <div className="min-h-screen max-w-[820px] mx-auto mt-20 ">
+      <div className="max-w-[820px] mx-auto mt-20 ">
         <div className="flex flex-wrap justify-between pb-7">
           <div className="flex flex-wrap gap-x-3">
             <img src={shoppingCartIcon} alt="Иконка продуктовой корзины" />
@@ -47,7 +47,7 @@ const Cart = (props) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

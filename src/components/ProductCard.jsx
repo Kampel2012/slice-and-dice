@@ -1,10 +1,10 @@
 import React from 'react';
 import PizzaConfig from './UI/PizzaConfig';
 
-const ProductCard = ({ src, title, price }) => {
+const ProductCard = ({ src, title, price, id }) => {
   return (
     <div className="max-w-[280px]">
-      <img alt={title} src={src} className="mx-auto" />
+      <img alt={title} src={src} className="mx-auto w-[280px]" />
       <h3 className="text-center font-extrabold text-xl mt-3 mb-6">{title}</h3>
       <PizzaConfig />
       <div className="flex flex-wrap justify-between align-middle mt-4">
