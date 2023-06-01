@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Category = ({ textBtn, isActive, changeCategory }) => {
+const Category = ({ textBtn, isActive, changeCategory, id }) => {
   function changeCategoryOnClick() {
-    changeCategory(textBtn);
+    changeCategory(id);
   }
 
   const stylesBtn = isActive

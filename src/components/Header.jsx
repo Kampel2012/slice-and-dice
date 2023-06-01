@@ -14,7 +14,7 @@ const Header = (props) => {
         <div className="flex self-center ">
           <img
             src={headerLogo}
-            alt="логотип компании "
+            alt="логотип компании"
             className="w-14 h-14 mr-4 self-center"
           />
           <div>
