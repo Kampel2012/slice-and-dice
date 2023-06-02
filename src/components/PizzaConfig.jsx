@@ -21,8 +21,8 @@ const PizzaConfig = ({ types, sizes }) => {
     return +typeOfDough === item;
   }
 
-  function minMax(array) {
-    return Math.min(Math.max(array.length, 1), 3);
+  function minMax(arr) {
+    return Math.min(Math.max(arr.length, 1), 3);
   }
 
   function isDisable(param, array) {
@@ -31,6 +31,10 @@ const PizzaConfig = ({ types, sizes }) => {
   }
 
   const typeName = ['Тонкое', 'Традиционное'];
+
+  const classesSize = `grid pt-0 pb-2 px-1 h-10 overflow-hidden grid-cols-${minMax(
+    sizes
+  )}`;
 
   return (
     <div className="bg-[#F3F3F3] rounded-md">
@@ -43,28 +47,26 @@ const PizzaConfig = ({ types, sizes }) => {
             name={'size'}
             onChange={onChangeTypeOfDough}
             isDisable={isDisable(iter, types)}
-            key={iter}
+            key={item}
           />
         ))}
       </div>
 
-      <div
-        className={`grid pt-0 pb-2 px-1 h-10 overflow-hidden grid-cols-${minMax(
-          sizes
-        )}`}
-      >
+      <div className={classesSize}>
         {sizes.map((item, iter) => (
           <PizzaConfigOption
             isActive={isActiveSize(item)}
             size={item}
             value={item}
             onChange={onChangeSize}
-            key={iter}
+            key={item}
             name={'size'}
-            isDisable={isDisable(item, sizes)} //TODO подумать нужна эта проверка тут или нет
+            isDisable={isDisable(item, sizes)}
           />
         ))}
       </div>
+
+      <span className="grid-cols-3" />
     </div>
   );
 };
