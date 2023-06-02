@@ -3,12 +3,13 @@ import Header from '../Header';
 import shoppingCartIcon from '../../images/shopping-cart-black.svg';
 import trashIcon from '../../images/trash-icon-white.svg';
 import ProductInCart from '../ProductInCart';
+import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
   return (
-    <div className="container mx-auto rounded-3xl bg-white px-10 pb-10">
+    <div className="container mx-auto rounded-3xl bg-white px-10 pb-14">
       <Header />
-      <div className="max-w-[820px] mx-auto mt-20 ">
+      <div className="max-w-[820px] mx-auto mt-14 ">
         <div className="flex flex-wrap justify-between pb-7">
           <div className="flex flex-wrap gap-x-3">
             <img src={shoppingCartIcon} alt="Иконка продуктовой корзины" />
@@ -32,13 +33,13 @@ const Cart = (props) => {
           </p>
         </div>
         <div className="flex flex-wrap justify-between gap-x-4 mt-10">
-          <button
-            type="button"
-            disabled="disabled"
+          <Link
+            to="/"
+            /*             disabled="disabled" */
             className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
           >
             <span className="mr-2">&#10094;</span> Вернуться назад
-          </button>
+          </Link>
           <button
             type="button"
             className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full"
