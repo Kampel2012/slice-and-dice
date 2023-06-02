@@ -18,7 +18,7 @@ const Sort = (props) => {
   };
 
   return (
-    <div className="text-sm font-bold self-center flex-wrap hidden lg:flex">
+    <div className="text-sm font-bold self-center flex-wrap flex">
       ▲ Сортировка по:{' '}
       <div className="relative group">
         <div
@@ -31,7 +31,7 @@ const Sort = (props) => {
         </div>
 
         {isActivePopup && (
-          <ul className="overflow-hidden absolute cursor-pointer right-0 top-7 py-2 shadow rounded-lg font-normal text-sm w-32">
+          <ul className="overflow-hidden absolute cursor-pointer right-0 top-7 py-2 shadow rounded-lg font-normal text-sm w-32 z-10">
             {categoriesForSort.map((item, iter) => (
               <li
                 key={item}

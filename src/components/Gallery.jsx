@@ -26,7 +26,7 @@ const Gallery = (props) => {
   }, []);
 
   return (
-    <div className="mt-9 grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 mb-20">
+    <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 mb-20">
       {isLoading
         ? [...new Array(8)].map((item, i) => <SceletonProductCard key={i} />)
         : pizzaInfo.map((piz) => <ProductCard key={piz.id} {...piz} />)}

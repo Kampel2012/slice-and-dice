@@ -19,7 +19,7 @@ const Header = (props) => {
   }
 
   return (
-    <div className="flex justify-between h-36 border-b">
+    <div className="flex flex-wrap justify-between h-36 border-b">
       <div className="container mx-auto flex justify-between">
         <div className="flex self-center cursor-pointer" onClick={onClickLogo}>
           <img
@@ -28,7 +28,9 @@ const Header = (props) => {
             className="w-14 h-14 mr-4 self-center"
           />
           <div>
-            <h1 className="text-2xl font-extrabold">SLISE AND DICE</h1>
+            <h1 className="text-lg sm:text-2xl font-extrabold">
+              SLISE AND DICE
+            </h1>
             <p className="text-base text-gray-500">
               самая лучшая пицца во вселенной
             </p>
@@ -36,7 +38,7 @@ const Header = (props) => {
         </div>
         {!isACart && (
           <div
-            className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer"
+            className="self-center w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer hidden sm:flex"
             onClick={onClickCart}
           >
             <div className="self-center">520 ₽</div>
