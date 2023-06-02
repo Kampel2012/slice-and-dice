@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from '../Header';
 import cartEmpty from '../../images/shopping-cart-empty.svg';
+import { Link } from 'react-router-dom';
 
 const EmptyCart = (props) => {
   return (
     <>
-      <div className="h-screen flex flex-wrap flex-col">
+      <div className="flex flex-wrap flex-col container mx-auto rounded-3xl bg-white px-10 pb-10">
         <Header />
-        <div className="container mx-auto text-center flex flex-wrap flex-col grow justify-center">
+        <div className="my-10 text-center flex flex-wrap flex-col grow justify-center">
           <h2 className="font-bold text-3xl tracking-wide mt-3">
             Корзина пустая 😕
           </h2>
@@ -19,9 +20,9 @@ const EmptyCart = (props) => {
           </p>
           <img alt="Пустая корзина" src={cartEmpty} className="mt-12" />
           <div className="mt-[60px]">
-            <button className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full">
+            <Link to={'/'} className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full">
               Вернуться назад
-            </button>
+            </Link>
           </div>
         </div>
       </div>

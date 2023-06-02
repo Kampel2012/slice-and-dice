@@ -1,17 +1,27 @@
 import React from 'react';
 import headerLogo from '../images/logoHeader.png';
 import cartLogo from '../images/shopping-cart.svg';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = (props) => {
   const location = useLocation();
-  const notACart =
-    location.pathname !== '/cart' && location.pathname !== '/emptycart';
+  const isACart =
+    location.pathname === '/cart' || location.pathname === '/emptycart';
+
+  const navigate = useNavigate();
+
+  function onClickCart() {
+    navigate('/cart');
+  }
+
+  function onClickLogo() {
+    navigate('/');
+  }
 
   return (
-    <div className="flex justify-between h-36 border-b shadow">
+    <div className="flex justify-between h-36 border-b">
       <div className="container mx-auto flex justify-between">
-        <div className="flex self-center ">
+        <div className="flex self-center cursor-pointer" onClick={onClickLogo}>
           <img
             src={headerLogo}
             alt="логотип компании"
@@ -24,8 +34,11 @@ const Header = (props) => {
             </p>
           </div>
         </div>
-        {notACart && (
-          <div className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3">
+        {!isACart && (
+          <div
+            className="self-center flex w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer"
+            onClick={onClickCart}
+          >
             <div className="self-center">520 ₽</div>
             <p className="self-center  opacity-25 text-2xl">|</p>
             <div className="self-center flex">

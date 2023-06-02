@@ -1,0 +1,21 @@
+.app {
+  background-image: linear-gradient(
+    to right top,
+    #ffaada,
+    #ffabbf,
+    #ffb2a2,
+    #ffc18a,
+    #ffd37c,
+    #fcdb7a,
+    #f8e379,
+    #f3eb7a,
+    #f6e97b,
+    #f9e77d,
+    #fce57e,
+    #ffe380
+  );
+  min-height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding: 20px;
+}

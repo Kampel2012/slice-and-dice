@@ -6,7 +6,7 @@ import ProductInCart from '../ProductInCart';
 
 const Cart = (props) => {
   return (
-    <div className="h-screen">
+    <div className="container mx-auto rounded-3xl bg-white px-10 pb-10">
       <Header />
       <div className="max-w-[820px] mx-auto mt-20 ">
         <div className="flex flex-wrap justify-between pb-7">

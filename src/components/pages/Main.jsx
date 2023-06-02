@@ -6,7 +6,7 @@ import Category from '../Categories';
 
 const Main = (props) => {
   return (
-    <div className="min-h-screen pb-10">
+    <div className="min-h-screen pb-1 container mx-auto rounded-3xl bg-white px-6">
       <Header />
       <div className="container mx-auto ">
         <div className="flex flex-wrap justify-between">
