@@ -19,7 +19,7 @@ const Header = (props) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between h-36 border-b">
+    <div className="flex flex-wrap justify-between h-36 border-b md:mx-4">
       <div className="container mx-auto flex justify-between">
         <div className="flex self-center cursor-pointer" onClick={onClickLogo}>
           <img

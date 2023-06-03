@@ -54,7 +54,7 @@ const Main = (props) => {
         <Header />
       </div>
       <div className="container mx-auto px-2 md:px-6">
-        <div className="flex justify-between">
+        <div className="flex justify-between md:px-3">
           <Category changeCategory={changeCategory} categoryId={categoryId} />
           <Sort
             setSort={setSort}

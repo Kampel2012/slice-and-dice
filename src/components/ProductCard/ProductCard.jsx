@@ -27,7 +27,9 @@ const ProductCard = ({
       <div>
         <PizzaConfig types={types} sizes={sizes} />
         <div className="flex flex-wrap justify-between align-middle mt-4">
-          <p className="text-2xl font-bold self-center">от {price} ₽</p>
+          <p className="text-xl md:text-2xl font-bold self-center">
+            от {price} ₽
+          </p>
           <button
             type="button"
             onClick={onClickAdd}
