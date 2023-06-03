@@ -54,9 +54,9 @@ const Main = (props) => {
     <SceletonProductCard key={i} />
   ));
 
-  const pizzas = pizzaInfo.map((pizza) => (
-    <ProductCard key={pizza.id} {...pizza} />
-  ));
+  const pizzas = pizzaInfo
+    .filter((item) => item.title.toLowerCase().includes(searchValue))
+    .map((pizza) => <ProductCard key={pizza.id} {...pizza} />);
 
   return (
     <div className="min-h-screen pb-1 container mx-auto rounded-3xl bg-white">
