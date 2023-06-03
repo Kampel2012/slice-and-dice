@@ -18,7 +18,7 @@ const Search = ({ searchValue, setSearchValue }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSetSearchValue = useCallback(
     debounce((e) => {
-      setSearchValue(e.target.value.toLowerCase());
+      setSearchValue(e.target.value);
     }, 1000),
     []
   );

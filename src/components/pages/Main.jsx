@@ -35,10 +35,14 @@ const Main = (props) => {
     async function getInitialPizzas() {
       setIsLoading(true);
       const category = categoryId > 0 ? '&category=' + categoryId : '';
+      const search = searchValue ? `&search=${searchValue}` : '';
+      const order = `&order=${sortOrder}`;
+      const sort = `sortBy=${sortData.sort}`;
+      const baseUrl = `https://6479a2f0a455e257fa6376cd.mockapi.io/items?`;
 
       try {
         const pizzas = await axios.get(
-          `https://6479a2f0a455e257fa6376cd.mockapi.io/items?sortBy=${sortData.sort}${category}&order=${sortOrder}`
+          `${baseUrl}${sort}${category}${order}${search}`
         );
         setPizzaInfo(pizzas.data);
       } catch (error) {
@@ -48,15 +52,15 @@ const Main = (props) => {
       }
     }
     getInitialPizzas();
-  }, [categoryId, sortData, sortOrder]);
+  }, [categoryId, sortData, sortOrder, searchValue]);
 
   const skeletons = [...new Array(8)].map((item, i) => (
     <SceletonProductCard key={i} />
   ));
 
-  const pizzas = pizzaInfo
-    .filter((item) => item.title.toLowerCase().includes(searchValue))
-    .map((pizza) => <ProductCard key={pizza.id} {...pizza} />);
+  const pizzas = pizzaInfo.map((pizza) => (
+    <ProductCard key={pizza.id} {...pizza} />
+  ));
 
   return (
     <div className="min-h-screen pb-1 container mx-auto rounded-3xl bg-white">
