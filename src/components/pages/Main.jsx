@@ -17,6 +17,8 @@ const Main = (props) => {
   });
   const [sortOrder, setSortOrder] = useState('desc');
 
+  const [searchValue, setSearchValue] = useState('');
+
   function changeSortOrder(value) {
     setSortOrder(value);
   }
@@ -48,10 +50,18 @@ const Main = (props) => {
     getInitialPizzas();
   }, [categoryId, sortData, sortOrder]);
 
+  const skeletons = [...new Array(8)].map((item, i) => (
+    <SceletonProductCard key={i} />
+  ));
+
+  const pizzas = pizzaInfo.map((pizza) => (
+    <ProductCard key={pizza.id} {...pizza} />
+  ));
+
   return (
     <div className="min-h-screen pb-1 container mx-auto rounded-3xl bg-white">
       <div className="mx-6">
-        <Header />
+        <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="container mx-auto px-2 md:px-6">
         <div className="flex justify-between md:px-3">
@@ -67,11 +77,7 @@ const Main = (props) => {
         <h2 className="font-bold text-3xl ml-4"> Все пиццы </h2>
         <div className="px-4 md:px-6">
           <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 mb-20">
-            {isLoading
-              ? [...new Array(8)].map((item, i) => (
-                  <SceletonProductCard key={i} />
-                ))
-              : pizzaInfo.map((piz) => <ProductCard key={piz.id} {...piz} />)}
+            {isLoading ? skeletons : pizzas}
           </div>
         </div>
       </div>
