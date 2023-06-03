@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; //!Пока неактивный компонент
 import ProductCard from './ProductCard/ProductCard';
 import axios from 'axios';
 import SceletonProductCard from './ProductCard/SceletonProductCard';
