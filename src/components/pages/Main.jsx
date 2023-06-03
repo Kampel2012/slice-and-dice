@@ -6,6 +6,7 @@ import Category from '../Categories';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
+import NoPizza from '../NoPizza';
 
 const Main = (props) => {
   const [pizzaInfo, setPizzaInfo] = useState([]);
@@ -78,7 +79,11 @@ const Main = (props) => {
           />
         </div>
 
-        <h2 className="font-bold text-3xl ml-4"> Все пиццы </h2>
+        {!isLoading && pizzas.length === 0 && <NoPizza />}
+        {pizzas.length !== 0 && (
+          <h2 className="font-bold text-3xl ml-4"> Все пиццы </h2>
+        )}
+
         <div className="px-4 md:px-6">
           <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 mb-20">
             {isLoading ? skeletons : pizzas}

@@ -29,7 +29,7 @@ const Search = ({ searchValue, setSearchValue }) => {
       onChange={debounceSetSearchValue}
       placeholder="Поиск пиццы..."
       type="search"
-      className="px-2 h-14  text-xl w-full border-b-2 focus:outline-none"
+      className="px-2 h-14 text-xl w-full border-b-2 focus:outline-none"
     />
   );
 };

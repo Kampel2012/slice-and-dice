@@ -40,7 +40,7 @@ const Header = ({ searchValue, setSearchValue }) => {
 
         {!isACart && (
           <div
-            className="w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer flex items-center mt-4 md:mt-0"
+            className="w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer flex items-center mt-5 lg:mt-0"
             onClick={onClickCart}
           >
             <div className="">520 ₽</div>

@@ -32,7 +32,7 @@ const Sort = ({ sortData, setSort, sortOrder, changeSortOrder }) => {
         onClick={changeSortOrderHandle}
       >
         {triangle}
-      </span>{' '}
+      </span>
       Сортировка по:{' '}
       <div className="relative group">
         <div
