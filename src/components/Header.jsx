@@ -20,8 +20,8 @@ const Header = ({ searchValue, setSearchValue }) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-between min-h-[180px] lg:min-h-[144px] border-b md:mx-4">
-      <div className="container mx-auto flex md:justify-between justify-center items-center flex-wrap lg:flex-row flex-col my-5">
+    <div className="flex flex-wrap justify-between min-h-[180px] lg:min-h-[144px] md:mx-4">
+      <div className="container mx-auto flex md:justify-between justify-center items-center flex-wrap lg:flex-row flex-col mt-10">
         <div className="flex self-center cursor-pointer" onClick={onClickLogo}>
           <img
             src={headerLogo}
