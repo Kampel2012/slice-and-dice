@@ -1,6 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
+import { SearchContext } from '../contexts/SearchContext';
 
-const Search = ({ searchValue, setSearchValue }) => {
+const Search = () => {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
+
   function debounce(func, delay) {
     let timer;
     return function () {

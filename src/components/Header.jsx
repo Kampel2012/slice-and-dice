@@ -4,7 +4,7 @@ import cartLogo from '../images/shopping-cart.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Search from './Search';
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = () => {
   const location = useLocation();
   const isACart =
     location.pathname === '/cart' || location.pathname === '/emptycart';
@@ -54,7 +54,7 @@ const Header = ({ searchValue, setSearchValue }) => {
 
         {!isACart && (
           <div className="md:w-2/3 w-full mt-10 mb-2">
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+            <Search />
           </div>
         )}
       </div>
