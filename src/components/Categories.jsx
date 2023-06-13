@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import Category from './UI/Category';
 import useWindowSize from './hooks/useWindowSize';
+import Category from './UI/Category';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
-const Categories = ({ changeCategory, categoryId }) => {
+const Categories = () => {
+  const categoryId = useSelector((state) => state.filter.categoryId);
+  const dispatch = useDispatch();
+
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
 
   const { width } = useWindowSize();
@@ -19,6 +24,10 @@ const Categories = ({ changeCategory, categoryId }) => {
     'Острые',
     'Закрытые',
   ];
+
+  function changeCategory(id) {
+    dispatch(setCategoryId(id));
+  }
 
   function toggleCategoryMenu(pos) {
     setModalCategoryIsOpen(!modalCategoryIsOpen);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sort from '../Sort';
 /* import Gallery from '../Gallery'; */
 import Header from '../Header';
-import Category from '../Categories';
+import Categories from '../Categories';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
@@ -12,26 +12,11 @@ import { useSelector } from 'react-redux';
 const Main = (props) => {
   const [pizzaInfo, setPizzaInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
-  const [sortData, setSortData] = useState({
-    name: 'популярности',
-    sort: 'rating',
-  });
-  const [sortOrder, setSortOrder] = useState('desc');
+/*   const [sortOrder, setSortOrder] = useState('desc'); */
 
-  const searchValue = useSelector((state) => state.search.value).payload;
-
-  function changeSortOrder(value) {
-    setSortOrder(value);
-  }
-
-  function changeCategory(pos) {
-    setCategoryId(pos);
-  }
-
-  function setSort(pos) {
-    setSortData(pos);
-  }
+  // redux store
+  const searchValue = useSelector((state) => state.search.value);
+  const { categoryId, sortData, sortOrder } = useSelector((state) => state.filter);
 
   useEffect(() => {
     async function getInitialPizzas() {
@@ -71,13 +56,8 @@ const Main = (props) => {
       </div>
       <div className="container mx-auto px-2 md:px-6">
         <div className="flex justify-between md:px-3">
-          <Category changeCategory={changeCategory} categoryId={categoryId} />
-          <Sort
-            setSort={setSort}
-            sortData={sortData}
-            sortOrder={sortOrder}
-            changeSortOrder={changeSortOrder}
-          />
+          <Categories />
+          <Sort />
         </div>
 
         {!isLoading && pizzas.length === 0 && <NoPizza />}

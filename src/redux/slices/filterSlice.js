@@ -1,26 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
+  categoryId: 0,
+  sortData: {
+    name: 'популярности',
+    sort: 'rating',
+  },
+  sortOrder: 'desc',
+  categoriesForSort: [
+    { name: 'популярности', sort: 'rating' },
+    { name: 'цене', sort: 'price' },
+    { name: 'алфавиту', sort: 'title' },
+  ],
 };
 
 export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    setCategoryId: (state, action) => {
+      state.categoryId = action.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    setSortData: (state, action) => {
+      state.sortData = action.payload;
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    setSortOrder: (state, action) => {
+      state.sortOrder = action.payload;
     },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = filterSlice.actions;
+export const { setCategoryId, setSortData, setSortOrder } = filterSlice.actions;
 
 export default filterSlice.reducer;

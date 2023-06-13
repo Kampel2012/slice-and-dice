@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortData, setSortOrder } from '../redux/slices/filterSlice';
 
-const Sort = ({ sortData, setSort, sortOrder, changeSortOrder }) => {
-  const categoriesForSort = [
-    { name: 'популярности', sort: 'rating' },
-    { name: 'цене', sort: 'price' },
-    { name: 'алфавиту', sort: 'title' },
-  ];
-
+const Sort = (props) => {
+  const { sortData, sortOrder, categoriesForSort } = useSelector(
+    (state) => state.filter
+  );
+  const dispatch = useDispatch();
   const [isActivePopup, setIsActivePopup] = useState(false);
 
   const stylesCurrentSortItem = (item) =>
@@ -17,12 +17,12 @@ const Sort = ({ sortData, setSort, sortOrder, changeSortOrder }) => {
   const triangle = sortOrder === 'asc' ? '▲' : '▼';
 
   const onSelectItem = (item) => {
-    setSort(item);
+    dispatch(setSortData(item));
     togglePopupsActive();
   };
 
   function changeSortOrderHandle() {
-    changeSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    dispatch(setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc'));
   }
 
   return (
