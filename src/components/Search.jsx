@@ -1,8 +1,10 @@
-import React, { useCallback, useContext } from 'react';
-import { SearchContext } from '../contexts/SearchContext';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeSearchValue } from '../redux/slices/searchSlice';
 
 const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const searchValue = useSelector((state) => state.search.value);
+  const dispatch = useDispatch();
 
   function debounce(func, delay) {
     let timer;
@@ -21,7 +23,7 @@ const Search = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSetSearchValue = useCallback(
     debounce((e) => {
-      setSearchValue(e.target.value);
+      dispatch(changeSearchValue(e.target.value));
     }, 1000),
     []
   );
