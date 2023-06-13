@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import Sort from '../Sort';
-/* import Gallery from '../Gallery'; */
+/* import Gallery from '../Gallery'; */ //TODO Перенести логику пицц и их загрузки в геллери
 import Header from '../Header';
 import Categories from '../Categories';
 import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
 import NoPizza from '../NoPizza';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPizzaInfo } from '../../redux/slices/pizzasSlice';
 
 const Main = (props) => {
-  const [pizzaInfo, setPizzaInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-/*   const [sortOrder, setSortOrder] = useState('desc'); */
 
   // redux store
+  const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.search.value);
-  const { categoryId, sortData, sortOrder } = useSelector((state) => state.filter);
+  const { categoryId, sortData, sortOrder } = useSelector(
+    (state) => state.filter
+  );
+  const pizzaInfo = useSelector((state) => state.pizzas.pizzaInfo);
 
   useEffect(() => {
     async function getInitialPizzas() {
@@ -31,7 +34,7 @@ const Main = (props) => {
         const pizzas = await axios.get(
           `${baseUrl}${sort}${category}${order}${search}`
         );
-        setPizzaInfo(pizzas.data);
+        dispatch(setPizzaInfo(pizzas.data));
       } catch (error) {
         console.warn(error);
       } finally {
@@ -39,7 +42,7 @@ const Main = (props) => {
       }
     }
     getInitialPizzas();
-  }, [categoryId, sortData, sortOrder, searchValue]);
+  }, [categoryId, sortData, sortOrder, searchValue, dispatch]);
 
   const skeletons = [...new Array(8)].map((item, i) => (
     <SceletonProductCard key={i} />

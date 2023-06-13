@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     filter: filterReducer,
     search: searchReducer,
-    pizza: pizzaReducer,
+    pizzas: pizzaReducer,
   },
 });

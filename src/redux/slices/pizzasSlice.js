@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  pizzas: '',
+  pizzaInfo: [],
 };
 
 export const searchSlice = createSlice({
   name: 'pizzas',
   initialState,
   reducers: {
-    setPizzaData: (state, newValue) => {
-      state.pizzas = newValue;
+    setPizzaInfo: (state, action) => {
+      state.pizzaInfo = action.payload;
     },
   },
 });
 
-export const { setPizzaData } = searchSlice.actions;
+export const { setPizzaInfo } = searchSlice.actions;
 
 export default searchSlice.reducer;
