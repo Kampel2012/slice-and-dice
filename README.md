@@ -6,6 +6,7 @@ ReactJS - js фреймворк
 Axios - запросы
 React Content Loader - скелетоны для загрузки
 MockApi - сервис для бекенда
+qs - библиотека для создания ссылки из параметров запроса
 
 useContext, debounce
 
