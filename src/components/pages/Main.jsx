@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import qs from 'qs';
+import qs from 'qs'; // библиотека для парса адрессной строки
 import Sort from '../Sort';
 /* import Gallery from '../Gallery'; */ //TODO Перенести логику пицц и их загрузки в геллери
 import Header from '../Header';
@@ -21,19 +21,17 @@ const Main = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const searchValue = useSelector((state) => state.search.value);
   const pizzaInfo = useSelector((state) => state.pizzas.pizzaInfo);
+  const { categoryId, sortData, sortOrder } = useSelector(
+    (state) => state.filter
+  );
 
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      console.log(params);
       dispatch(setFilters(params));
       isSearch.current = true;
     }
   }, [dispatch]);
-
-  const { categoryId, sortData, sortOrder } = useSelector(
-    (state) => state.filter
-  );
 
   useEffect(() => {
     if (isMounted.current) {
@@ -51,7 +49,7 @@ const Main = (props) => {
     if (!isSearch.current) {
       getInitialPizzas();
     }
-    
+
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sortData, sortOrder, searchValue, dispatch]);
@@ -101,7 +99,7 @@ const Main = (props) => {
         )}
 
         <div className="px-4 md:px-6">
-          <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 mb-20">
+          <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 lg:grid-cols-3 mb-20">
             {isLoading ? skeletons : pizzas}
           </div>
         </div>
