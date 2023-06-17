@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Sort from '../Sort';
 /* import Gallery from '../Gallery'; */ //TODO Перенести логику пицц и их загрузки в геллери
 import Header from '../Header';
 import Categories from '../Categories';
-import axios from 'axios';
 import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
 import NoPizza from '../NoPizza';

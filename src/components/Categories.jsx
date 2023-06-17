@@ -10,7 +10,7 @@ const Categories = () => {
 
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
 
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(300);
 
   function isActive(pos) {
     return pos === categoryId;

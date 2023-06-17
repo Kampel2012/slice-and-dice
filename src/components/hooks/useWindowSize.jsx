@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+import useDebounce from './useDebounce';
 
 function useWindowSize(delay) {
   const [windowSize, setWindowSize] = useState({
@@ -6,16 +7,12 @@ function useWindowSize(delay) {
     height: window.innerHeight,
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceResize = useCallback(
-    debounce(() => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }, 300),
-    []
-  );
+  const debounceResize = useDebounce(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }, delay);
 
   useEffect(() => {
     window.addEventListener('resize', debounceResize);
@@ -26,20 +23,6 @@ function useWindowSize(delay) {
   }, [debounceResize]);
 
   return windowSize;
-}
-
-function debounce(func, delay) {
-  let timer;
-  return function () {
-    const context = this;
-    const args = arguments;
-
-    clearTimeout(timer);
-
-    timer = setTimeout(() => {
-      func.apply(context, args);
-    }, delay);
-  };
 }
 
 export default useWindowSize;
