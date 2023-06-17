@@ -51,7 +51,7 @@ const Main = (props) => {
     if (!isSearch.current) {
       getInitialPizzas();
     }
-
+    
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sortData, sortOrder, searchValue, dispatch]);
