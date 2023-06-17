@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useWindowSize from './hooks/useWindowSize';
 import Category from './UI/Category';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
@@ -9,8 +8,6 @@ const Categories = () => {
   const dispatch = useDispatch();
 
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
-
-  const { width } = useWindowSize(300);
 
   function isActive(pos) {
     return pos === categoryId;
@@ -35,9 +32,9 @@ const Categories = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-2 my-10">
-      {width >= 1030 &&
-        categoryList.map((item, iter) => (
+    <div className="flex flex-wrap  my-10">
+      <div className="hidden lg:flex flex-wrap gap-1">
+        {categoryList.map((item, iter) => (
           <Category
             id={iter}
             key={iter}
@@ -46,14 +43,15 @@ const Categories = () => {
             changeCategory={changeCategory}
           />
         ))}
-      {width < 1030 && (
+      </div>
+      {
         <div
-          className="px-3 py-2 overflow-hidden cursor-pointer relative w-36 text-white bg-black rounded-xl text-center"
+          className="px-3 py-2 overflow-hidden cursor-pointer relative w-36 text-white bg-black rounded-xl text-center lg:hidden"
           onClick={() => setModalCategoryIsOpen(!modalCategoryIsOpen)}
         >
           {categoryList[categoryId]}
         </div>
-      )}
+      }
       {modalCategoryIsOpen && (
         <ul className="absolute bg-white rounded-lg overflow-hidden w-36 shadow-lg text-center">
           {categoryList.map((item, iter) => (
