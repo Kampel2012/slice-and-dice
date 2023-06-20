@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Counter = (props) => {
-  const [count, setCount] = useState(1);
-  const min = 1;
-  const max = 10;
+const Counter = ({ count, decrease, increase }) => {
+  const min = 0;
+  const max = 99;
 
-  function increase(params) {
-    applyCurrent(count + 1);
+  function increased(params) {
+    increase(applyCurrent(count + 1));
   }
 
-  function decrease(params) {
-    applyCurrent(count - 1);
+  function decreased(params) {
+    decrease(applyCurrent(count - 1));
   }
 
   function applyCurrent(num) {
     let validNum = Math.max(min, Math.min(max, num));
-    setCount(validNum);
+    return validNum;
   }
 
   return (
@@ -23,7 +22,7 @@ const Counter = (props) => {
       <button
         className="px-2 rounded-full border-2 border-orange-600 self-center font-bold text-orange-600"
         type="button"
-        onClick={decrease}
+        onClick={decreased}
       >
         -
       </button>
@@ -33,7 +32,7 @@ const Counter = (props) => {
       <button
         className="px-2 rounded-full border-2 border-orange-600 self-center font-bold text-orange-600"
         type="button"
-        onClick={increase}
+        onClick={increased}
       >
         +
       </button>

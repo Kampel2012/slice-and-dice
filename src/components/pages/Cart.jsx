@@ -1,50 +1,87 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header';
 import shoppingCartIcon from '../../images/shopping-cart-black.svg';
 import trashIcon from '../../images/trash-icon-white.svg';
 import ProductInCart from '../ProductInCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearItems } from '../../redux/slices/cartSlice';
 
 const Cart = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { items, totalPrice } = useSelector((state) => state.cart);
+
+  const pizzas = items.map((item) => <ProductInCart key={item.id} {...item} />);
+
+  useEffect(() => {
+    if (pizzas.length === 0) {
+      navigate('/emptycart');
+    }
+  }, [navigate, pizzas]);
+
+  const quantityOfPizzas = items.reduce((sum, item) => sum + item.count, 0);
+
+  const clearCartItems = () => dispatch(clearItems());
+
   return (
-    <div className="container mx-auto rounded-3xl bg-white px-10 pb-14">
-      <Header />
-      <div className="max-w-[820px] mx-auto mt-14 ">
-        <div className="flex flex-wrap justify-between pb-7">
-          <div className="flex flex-wrap gap-x-3">
-            <img src={shoppingCartIcon} alt="Иконка продуктовой корзины" />
-            <h3 className="font-bold text-3xl">Корзина</h3>
+    <div className="container mx-auto rounded-3xl bg-white px-3 sm:px-10 min-h-[97vh] pb-10">
+      <div className="mx-6">
+        <Header />
+      </div>
+
+      <div className="max-w-[820px] mx-auto align-middle">
+        <div className="flex flex-wrap justify-between pb-7 gap-2">
+          <div className="flex flex-wrap gap-x-1 md:gap-x-3">
+            <img
+              className="md:w-auto w-5"
+              src={shoppingCartIcon}
+              alt="Иконка продуктовой корзины"
+            />
+            <h3 className="font-bold md:text-3xl text-xl">Корзина</h3>
           </div>
           <div className="flex cursor-pointer text-[#B6B6B6] hover:text-gray-500 duration-300 gap-x-1">
             <img className="self-center" src={trashIcon} alt="Иконка корзины" />
-            <p className=" self-center">Очистить корзину</p>
+            <button
+              onClick={clearCartItems}
+              type="button"
+              className=" self-center"
+            >
+              Очистить корзину
+            </button>
           </div>
         </div>
-        <ProductInCart />
-        <ProductInCart />
-        <ProductInCart />
-        <div className="flex flex-wrap justify-between gap-x-4 mt-4">
+
+        {pizzas}
+
+        <div className="flex flex-wrap justify-between gap-x-4 mt-12">
           <p className="text-xl">
-            Всего пицц: <span className="font-bold">3 шт.</span>
+            Всего пицц:{' '}
+            <span className="font-bold">{quantityOfPizzas} шт.</span>
           </p>
           <p className="text-xl">
-            Сумма заказа:{' '}
-            <span className="font-bold text-orange-600">900 ₽</span>
+            Сумма заказа:
+            <span className="font-bold text-orange-600"> {totalPrice} ₽</span>
           </p>
         </div>
-        <div className="flex flex-wrap justify-between gap-x-4 mt-10">
+
+        <div className="flex flex-wrap justify-between mt-10 gap-y-4">
           <Link
             to="/"
-            /*             disabled="disabled" */
-            className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
+            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
           >
-            <span className="mr-2">&#10094;</span> Вернуться назад
+            <span className="mr-2">&#10094;</span> Вернуться
           </Link>
           <button
+            onClick={() => {
+              alert('Оплата принята, ждите в течении часика <3');
+              clearCartItems();
+            }}
             type="button"
-            className="px-9 py-4 bg-orange-600 font-bold text-white rounded-full"
+            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full"
           >
-            Оплатить сейчас
+            Оплатить заказ
           </button>
         </div>
       </div>

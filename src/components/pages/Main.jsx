@@ -84,7 +84,7 @@ const Main = (props) => {
 
   return (
     <div className="min-h-screen pb-1 container mx-auto rounded-3xl bg-white">
-      <div className="mx-6">
+      <div className="mx-6 pt-10">
         <Header />
       </div>
       <div className="container mx-auto px-3 md:px-6">

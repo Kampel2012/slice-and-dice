@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PizzaConfig from './PizzaConfig';
+import { addItem } from '../../redux/slices/cartSlice';
 
 const ProductCard = ({
   imageUrl,
@@ -11,10 +13,29 @@ const ProductCard = ({
   category,
   rating,
 }) => {
-  const [pizzaCount, setPizzaCount] = useState(0);
-  function onClickAdd() {
-    setPizzaCount((prev) => (prev + 1 > 9 ? 9 : prev + 1));
-  }
+  const typeName = ['тонкое', 'традиционное'];
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => id === obj.id)
+  );
+
+  const [configPizza, setConfigPizza] = useState({
+    type: types[0],
+    size: sizes[0],
+  });
+
+  const dispatch = useDispatch();
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: typeName[configPizza.type],
+      size: configPizza.size,
+    };
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="max-w-[280px] flex flex-wrap flex-col justify-between ">
@@ -25,7 +46,12 @@ const ProductCard = ({
         </h3>
       </div>
       <div>
-        <PizzaConfig types={types} sizes={sizes} />
+        <PizzaConfig
+          types={types}
+          sizes={sizes}
+          setConfigPizza={setConfigPizza}
+          typeName={typeName}
+        />
         <div className="flex flex-wrap justify-between align-middle mt-4">
           <p className="text-xl md:text-2xl font-bold self-center">
             от {price} ₽
@@ -33,12 +59,14 @@ const ProductCard = ({
           <button
             type="button"
             onClick={onClickAdd}
-            className="border border-orange-600 text-orange-600 px-2 py-2 rounded-full hover:bg-orange-600 hover:text-white group"
+            className="border border-orange-600 text-orange-600 px-3 py-2 rounded-full hover:bg-orange-600 hover:text-white group"
           >
             + Добавить
-            <span className="inline-flex items-center justify-center w-6 h-6 ml-1 border rounded-full border-orange-600 text-white bg-orange-600 group-hover:border-white">
-              {pizzaCount}
-            </span>
+            {cartItem && (
+              <span className="inline-flex items-center justify-center w-6 h-6 ml-1 border rounded-full border-orange-600 text-white bg-orange-600 group-hover:border-white">
+                {cartItem?.count}
+              </span>
+            )}
           </button>
         </div>
       </div>

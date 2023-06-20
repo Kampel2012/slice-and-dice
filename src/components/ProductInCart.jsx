@@ -1,33 +1,34 @@
 import React from 'react';
 import testIcon from '../images/AsiaCrev.png';
 import Counter from './UI/Counter';
+import { useDispatch } from 'react-redux';
+import {
+  decreaseCountItem,
+  increaseCountItem,
+} from '../redux/slices/cartSlice';
 
-const ProductInCart = (props) => {
+const ProductInCart = ({ title, price, id, imageUrl, type, size, count }) => {
+  const dispatch = useDispatch();
+  const decrease = () => dispatch(decreaseCountItem(id));
+  const increase = () => dispatch(increaseCountItem(id));
+
   return (
-    <div className="max-w-[820px] py-7 flex flex-wrap gap-x-4 items-center justify-between border-t ">
-      <div className="flex flex-wrap gap-x-5">
-        <img
-          src={props.img || testIcon}
-          alt={props.title}
-          className="w-20 h-20"
-        />
-        <div className="self-center">
-          <p className="font-bold text-xl">
-            {props.title || 'Креветки по-азиатски'}
+    <div className="max-w-[820px] py-7 items-center border-t border-b flex-wrap justify-between md:flex gap-x-6 text-center">
+      <div className="flex flex-wrap sm:gap-x-5 gap-x-4 grow">
+        <img src={imageUrl || testIcon} alt={title} className="w-20 h-20" />
+        <div className="self-center text-left">
+          <p className="font-bold sm:text-xl text-lg">
+            {title || 'Креветки по-азиатски'}
           </p>
-          <p className="text-lg text-[#8D8D8D] tracking-wide">
-            {props.settings || 'тонкое тесто, 40 см.'}
+          <p className="sm:text-lg text-md text-[#8D8D8D] tracking-wide">
+            {`${type}, ${size} см` || 'тонкое тесто, 40 см.'}
           </p>
         </div>
       </div>
-      <Counter />
-      <div className="font-bold text-xl">770 ₽</div>
-      <button
-        type="button"
-        className="px-2 rounded-full border-2 border-gray-300 self-center font-bold text-gray-300 hover:border-gray-400 hover:text-gray-400 duration-300"
-      >
-        x
-      </button>
+      <div className="flex flex-wrap gap-6 justify-between px-3 md:mt-0 mt-3">
+        <div className="font-bold text-xl">{price * count} ₽</div>
+        <Counter count={count} decrease={decrease} increase={increase} />
+      </div>
     </div>
   );
 };

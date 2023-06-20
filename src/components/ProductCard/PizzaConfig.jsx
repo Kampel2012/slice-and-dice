@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PizzaConfigOption from './PizzaConfigOption';
 
-const PizzaConfig = ({ types, sizes }) => {
+const PizzaConfig = ({ types, sizes, setConfigPizza, typeName }) => {
   const [typeOfDough, setTypeOfDough] = useState(types[0] || 0);
   const [currentSize, setCurrentSize] = useState(sizes[0] || sizes || null);
+
+  useEffect(() => {
+    setConfigPizza((prev) => {
+      return {
+        type: typeOfDough,
+        size: currentSize,
+      };
+    });
+  }, [currentSize, setConfigPizza, typeOfDough]);
 
   function onChangeTypeOfDough(evt) {
     setTypeOfDough(+evt.target.value);
@@ -29,8 +38,6 @@ const PizzaConfig = ({ types, sizes }) => {
     if (!array.includes(param)) return true;
     else return false;
   }
-
-  const typeName = ['Тонкое', 'Традиционное'];
 
   const classesSize = `grid pt-0 pb-2 px-1 h-10 overflow-hidden grid-cols-${minMax(
     sizes
