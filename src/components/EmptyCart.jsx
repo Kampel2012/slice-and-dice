@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Header';
-import cartEmpty from '../../images/shopping-cart-empty.svg';
+import Header from './Header';
+import cartEmpty from '../images/shopping-cart-empty.svg';
 import { Link } from 'react-router-dom';
 
 const EmptyCart = (props) => {
@@ -20,7 +20,10 @@ const EmptyCart = (props) => {
           </p>
           <img alt="Пустая корзина" src={cartEmpty} className="mt-12" />
           <div className="mt-[60px]">
-            <Link to={'/'} className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full">
+            <Link
+              to={'/'}
+              className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full"
+            >
               Вернуться назад
             </Link>
           </div>

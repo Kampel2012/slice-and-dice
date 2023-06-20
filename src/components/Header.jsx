@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const location = useLocation();
-  const isACart =
-    location.pathname === '/cart' || location.pathname === '/emptycart';
+  const isACart = location.pathname === '/cart';
 
   const navigate = useNavigate();
   const { items, totalPrice } = useSelector((state) => state.cart);

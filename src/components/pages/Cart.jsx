@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from '../Header';
+import EmptyCart from '../EmptyCart';
 import shoppingCartIcon from '../../images/shopping-cart-black.svg';
 import trashIcon from '../../images/trash-icon-white.svg';
 import ProductInCart from '../ProductInCart';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearItems } from '../../redux/slices/cartSlice';
 
 const Cart = (props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { items, totalPrice } = useSelector((state) => state.cart);
 
   const pizzas = items.map((item) => <ProductInCart key={item.id} {...item} />);
 
-  useEffect(() => {
-    if (pizzas.length === 0) {
-      navigate('/emptycart');
-    }
-  }, [navigate, pizzas]);
-
   const quantityOfPizzas = items.reduce((sum, item) => sum + item.count, 0);
-
   const clearCartItems = () => dispatch(clearItems());
+
+  if (!totalPrice) return <EmptyCart />;
 
   return (
     <div className="container mx-auto rounded-3xl bg-white px-3 sm:px-10 min-h-[97vh] pb-10">
