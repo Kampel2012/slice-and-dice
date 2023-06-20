@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
 import qs from 'qs'; // библиотека для парса адрессной строки
 import Sort from '../Sort';
 /* import Gallery from '../Gallery'; */ //TODO Перенести логику пицц и их загрузки в геллери
@@ -9,7 +8,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
 import NoPizza from '../NoPizza';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPizzaInfo } from '../../redux/slices/pizzasSlice';
+import { fetchPizzas } from '../../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router';
 import { setFilters } from '../../redux/slices/filterSlice';
 
@@ -18,9 +17,8 @@ const Main = (props) => {
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const [isLoading, setIsLoading] = useState(true);
   const searchValue = useSelector((state) => state.search.value);
-  const pizzaInfo = useSelector((state) => state.pizzas.pizzaInfo);
+  const { pizzaInfo, status } = useSelector((state) => state.pizzas);
   const { categoryId, sortData, sortOrder } = useSelector(
     (state) => state.filter
   );
@@ -63,23 +61,14 @@ const Main = (props) => {
   ));
 
   async function getInitialPizzas() {
-    setIsLoading(true);
     const category = categoryId > 0 ? '&category=' + categoryId : '';
     const search = searchValue ? `&search=${searchValue}` : '';
     const order = `&order=${sortOrder}`;
     const sort = `sortBy=${sortData.sort}`;
     const baseUrl = `https://6479a2f0a455e257fa6376cd.mockapi.io/items?`;
+    const url = `${baseUrl}${sort}${category}${order}${search}`;
 
-    try {
-      const pizzas = await axios.get(
-        `${baseUrl}${sort}${category}${order}${search}`
-      );
-      dispatch(setPizzaInfo(pizzas.data));
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(fetchPizzas(url));
   }
 
   return (
@@ -93,14 +82,14 @@ const Main = (props) => {
           <Sort />
         </div>
 
-        {!isLoading && pizzas.length === 0 && <NoPizza />}
-        {pizzas.length !== 0 && (
+        {status !== 'loading' && pizzas.length === 0 && <NoPizza />}
+        {(pizzas.length !== 0 || status === 'loading') && (
           <h2 className="font-bold text-3xl ml-4"> Все пиццы </h2>
         )}
 
         <div className="px-4 md:px-6">
           <div className="mt-9 flex flex-wrap justify-center sm:grid grid-cols gap-x-9 gap-y-16 xl:grid-cols-4 sm:grid-cols-2 lg:grid-cols-3 mb-20">
-            {isLoading ? skeletons : pizzas}
+            {status === 'loading' ? skeletons : pizzas}
           </div>
         </div>
       </div>
