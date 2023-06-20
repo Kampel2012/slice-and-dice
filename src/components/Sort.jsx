@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortData, setSortOrder } from '../redux/slices/filterSlice';
 
@@ -8,6 +8,7 @@ const Sort = (props) => {
   );
   const dispatch = useDispatch();
   const [isActivePopup, setIsActivePopup] = useState(false);
+  const sortRef = useRef();
 
   const stylesCurrentSortItem = (item) =>
     item === sortData.name &&
@@ -25,8 +26,22 @@ const Sort = (props) => {
     dispatch(setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc'));
   }
 
+  useEffect(() => {
+    function closePopupOnClickOutside(event) {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setIsActivePopup(false);
+      }
+    }
+    document.body.addEventListener('click', closePopupOnClickOutside);
+    return () =>
+      document.body.removeEventListener('click', closePopupOnClickOutside);
+  }, []);
+
   return (
-    <div className="text-sm font-bold justify-end self-center flex-wrap flex">
+    <div
+      ref={sortRef}
+      className="text-sm font-bold justify-end self-center flex-wrap flex"
+    >
       <span
         className="cursor-pointer text-opacity-70 text-red-600 text-md hover:text-opacity-40"
         onClick={changeSortOrderHandle}

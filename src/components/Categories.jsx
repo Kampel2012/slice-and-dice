@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Category from './UI/Category';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
@@ -31,8 +31,21 @@ const Categories = () => {
     changeCategory(pos);
   }
 
+  const categoryRef = useRef();
+
+  useEffect(() => {
+    function closePopupOnClickOutside(event) {
+      if (!event.composedPath().includes(categoryRef.current)) {
+        setModalCategoryIsOpen(false);
+      }
+    }
+    document.body.addEventListener('click', closePopupOnClickOutside);
+    return () =>
+      document.body.removeEventListener('click', closePopupOnClickOutside);
+  }, []);
+
   return (
-    <div className="flex flex-wrap  my-10">
+    <div ref={categoryRef} className="flex flex-wrap my-10">
       <div className="hidden lg:flex flex-wrap gap-1">
         {categoryList.map((item, iter) => (
           <Category
@@ -53,7 +66,7 @@ const Categories = () => {
         </div>
       }
       {modalCategoryIsOpen && (
-        <ul className="absolute bg-white rounded-lg overflow-hidden w-36 shadow-lg text-center">
+        <ul className="absolute bg-white rounded-xl overflow-hidden w-36 shadow-lg text-center">
           {categoryList.map((item, iter) => (
             <li
               onClick={() => toggleCategoryMenu(iter)}
