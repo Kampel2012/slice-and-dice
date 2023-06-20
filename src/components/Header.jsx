@@ -12,6 +12,7 @@ const Header = () => {
 
   const navigate = useNavigate();
   const { items, totalPrice } = useSelector((state) => state.cart);
+  const quantityOfPizzas = items.reduce((sum, item) => sum + item.count, 0);
 
   function onClickCart() {
     navigate('/cart');
@@ -49,7 +50,7 @@ const Header = () => {
             <p className="opacity-25 text-2xl">|</p>
             <div className="flex">
               <img src={cartLogo} alt="Иконка корзины" />
-              <span className="ml-1">{items.length}</span>
+              <span className="ml-1">{quantityOfPizzas}</span>
             </div>
           </div>
         )}
