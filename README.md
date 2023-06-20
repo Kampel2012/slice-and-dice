@@ -1,3 +1,5 @@
+https://kampel2012.github.io/slice-and-dice/
+
 Стек -
 
 HTML, CSS, JS
