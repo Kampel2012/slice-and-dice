@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/slice-and-dice/static/css/main.7fef27d3.css",
-    "main.js": "/slice-and-dice/static/js/main.5ecbb72a.js",
+    "main.js": "/slice-and-dice/static/js/main.57312dec.js",
     "static/media/AsiaCrev.png": "/slice-and-dice/static/media/AsiaCrev.499eed4adc76e318b4d9.png",
     "static/media/logoHeader.png": "/slice-and-dice/static/media/logoHeader.c038bb9e2d9861164fc4.png",
     "static/media/shopping-cart-empty.svg": "/slice-and-dice/static/media/shopping-cart-empty.49e3eb7618f9e300dd436cae4aabd67d.svg",
@@ -10,10 +10,10 @@
     "static/media/trash-icon-white.svg": "/slice-and-dice/static/media/trash-icon-white.ceafcffb34cece0b1462c3505b170d88.svg",
     "index.html": "/slice-and-dice/index.html",
     "main.7fef27d3.css.map": "/slice-and-dice/static/css/main.7fef27d3.css.map",
-    "main.5ecbb72a.js.map": "/slice-and-dice/static/js/main.5ecbb72a.js.map"
+    "main.57312dec.js.map": "/slice-and-dice/static/js/main.57312dec.js.map"
   },
   "entrypoints": [
     "static/css/main.7fef27d3.css",
-    "static/js/main.5ecbb72a.js"
+    "static/js/main.57312dec.js"
   ]
 }
