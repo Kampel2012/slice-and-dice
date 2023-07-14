@@ -19,6 +19,15 @@ export const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      // ! Это для добавления разных типов пицц, но надо переделать удаление(там фильтр по ID) и
+      // ! ключ отрисовки в корзине там id будет дублироваться надо будет придумать что-то
+      // ! например key={`${id}${type}${size}`}
+      /*       const findItem = state.items.find(
+        (obj) =>
+          obj.id ===
+          action.payload
+            .id && obj.size === action.payload.size && obj.type === action.payload.type
+      ); */
       if (findItem) {
         findItem.count++;
       } else {
