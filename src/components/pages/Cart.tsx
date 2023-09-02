@@ -7,11 +7,12 @@ import ProductInCart from '../ProductInCart';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearItems } from '../../redux/slices/cartSlice';
+import { RootState } from '../../redux/store';
 
-const Cart = (props) => {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
 
   const pizzas = items.map((item) => <ProductInCart key={item.id} {...item} />);
 
@@ -41,8 +42,7 @@ const Cart = (props) => {
             <button
               onClick={clearCartItems}
               type="button"
-              className=" self-center"
-            >
+              className=" self-center">
               Очистить корзину
             </button>
           </div>
@@ -64,8 +64,7 @@ const Cart = (props) => {
         <div className="flex flex-wrap justify-between mt-10 gap-y-4">
           <Link
             to="/"
-            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300"
-          >
+            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full disabled:bg-white disabled:font-normal disabled:border disabled:border-gray-300 disabled:text-gray-300">
             <span className="mr-2">&#10094;</span> Вернуться
           </Link>
           <button
@@ -74,8 +73,7 @@ const Cart = (props) => {
               clearCartItems();
             }}
             type="button"
-            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full"
-          >
+            className="sm:px-9 px-2 sm:py-4 py-2 bg-orange-600 font-bold text-white rounded-full">
             Оплатить заказ
           </button>
         </div>

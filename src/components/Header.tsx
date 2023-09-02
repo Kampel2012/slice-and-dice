@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import headerLogo from '../images/logoHeader.png';
 import cartLogo from '../images/shopping-cart.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Search from './Search';
 import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
-const Header = () => {
+const Header: FC = () => {
   const location = useLocation();
   const isACart = location.pathname === '/cart';
 
   const navigate = useNavigate();
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
   const quantityOfPizzas = items.reduce((sum, item) => sum + item.count, 0);
 
   function onClickCart() {
@@ -43,8 +44,7 @@ const Header = () => {
         {!isACart && (
           <div
             className="w-40 h-14 justify-center text-white bg-orange-600 rounded-full gap-3 cursor-pointer flex items-center mt-5 lg:mt-0"
-            onClick={onClickCart}
-          >
+            onClick={onClickCart}>
             <div className="">{totalPrice} ₽</div>
             <p className="opacity-25 text-2xl">|</p>
             <div className="flex">

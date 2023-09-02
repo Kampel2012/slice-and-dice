@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Header from './Header';
 import cartEmpty from '../images/shopping-cart-empty.svg';
 import { Link } from 'react-router-dom';
 
-const EmptyCart = (props) => {
+const EmptyCart: FC = () => {
   return (
     <>
       <div className="flex flex-wrap flex-col container mx-auto rounded-3xl bg-white px-10 pb-10">
@@ -22,8 +22,7 @@ const EmptyCart = (props) => {
           <div className="mt-[60px]">
             <Link
               to={'/'}
-              className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full"
-            >
+              className="px-10 py-3 max-w-fit bg-black font-bold text-white rounded-full">
               Вернуться назад
             </Link>
           </div>

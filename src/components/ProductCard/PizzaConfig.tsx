@@ -1,40 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import PizzaConfigOption from './PizzaConfigOption';
 
-const PizzaConfig = ({ types, sizes, setConfigPizza, typeName }) => {
+interface IConfig {
+  type: number;
+  size: number;
+}
+
+interface IProps {
+  types: number[];
+  sizes: number[];
+  setConfigPizza: (config: IConfig) => void;
+  typeName: string[];
+}
+
+const PizzaConfig: FC<IProps> = ({
+  types,
+  sizes,
+  setConfigPizza,
+  typeName,
+}) => {
   const [typeOfDough, setTypeOfDough] = useState(types[0] || 0);
-  const [currentSize, setCurrentSize] = useState(sizes[0] || sizes || null);
+  const [currentSize, setCurrentSize] = useState(sizes[0]);
 
   useEffect(() => {
-    setConfigPizza((prev) => {
-      return {
-        type: typeOfDough,
-        size: currentSize,
-      };
+    setConfigPizza({
+      type: typeOfDough,
+      size: currentSize,
     });
   }, [currentSize, setConfigPizza, typeOfDough]);
 
-  function onChangeTypeOfDough(evt) {
+  function onChangeTypeOfDough(evt: ChangeEvent<HTMLInputElement>) {
     setTypeOfDough(+evt.target.value);
   }
 
-  function onChangeSize(evt) {
+  function onChangeSize(evt: ChangeEvent<HTMLInputElement>) {
     setCurrentSize(+evt.target.value);
   }
 
-  function isActiveSize(item) {
+  function isActiveSize<T>(item: T) {
     return +currentSize === item;
   }
 
-  function isActiveTypeOfDough(item) {
+  function isActiveTypeOfDough<T>(item: T) {
     return +typeOfDough === item;
   }
 
-  function minMax(arr) {
+  function minMax(arr: number[]) {
     return Math.min(Math.max(arr.length, 1), 3);
   }
 
-  function isDisable(param, array) {
+  function isDisable(param: number, array: number[]) {
     if (!array.includes(param)) return true;
     else return false;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 
-const NotFound404 = (props) => {
+const NotFound404: React.FC = () => {
   return (
     <div className="container mx-auto rounded-3xl bg-white px-10 min-h-[600px]">
       <Header />

@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const PizzaConfigOption = ({
+interface PizzaConfigOptionProps {
+  onChange: any; //!
+  value: number;
+  isActive: boolean;
+  name: string;
+  isDisable: boolean;
+  size?: number;
+  text?: string;
+}
+
+const PizzaConfigOption: FC<PizzaConfigOptionProps> = ({
   size,
   onChange,
   value,
@@ -20,8 +30,7 @@ const PizzaConfigOption = ({
     <label
       className={
         isDisable ? disableStyles : isActive ? activeStyles : defaultStyles
-      }
-    >
+      }>
       <input
         type="radio"
         name={name}

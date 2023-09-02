@@ -1,23 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSortData, setSortOrder } from '../redux/slices/filterSlice';
+import {
+  ICategory,
+  setSortData,
+  setSortOrder,
+} from '../redux/slices/filterSlice';
+import { RootState } from '../redux/store';
 
-const Sort = (props) => {
+const Sort = () => {
   const { sortData, sortOrder, categoriesForSort } = useSelector(
-    (state) => state.filter
+    (state: RootState) => state.filter
   );
   const dispatch = useDispatch();
   const [isActivePopup, setIsActivePopup] = useState(false);
-  const sortRef = useRef();
+  const sortRef = useRef(null);
 
-  const stylesCurrentSortItem = (item) =>
+  const stylesCurrentSortItem = (item: string) =>
     item === sortData.name &&
     'font-bold text-orange-600 bg-orange-600 bg-opacity-5';
 
   const togglePopupsActive = () => setIsActivePopup(!isActivePopup);
   const triangle = sortOrder === 'asc' ? '▲' : '▼';
 
-  const onSelectItem = (item) => {
+  const onSelectItem = (item: ICategory) => {
     dispatch(setSortData(item));
     togglePopupsActive();
   };
@@ -27,7 +32,8 @@ const Sort = (props) => {
   }
 
   useEffect(() => {
-    function closePopupOnClickOutside(event) {
+    function closePopupOnClickOutside(event: Event) {
+      if (sortRef.current === null) return;
       if (!event.composedPath().includes(sortRef.current)) {
         setIsActivePopup(false);
       }
@@ -40,20 +46,17 @@ const Sort = (props) => {
   return (
     <div
       ref={sortRef}
-      className="text-sm font-bold justify-end self-center flex-wrap flex"
-    >
+      className="text-sm font-bold justify-end self-center flex-wrap flex">
       <span
         className="cursor-pointer text-opacity-70 text-red-600 text-md hover:text-opacity-40"
-        onClick={changeSortOrderHandle}
-      >
+        onClick={changeSortOrderHandle}>
         {triangle}
       </span>
       Сортировка по:{' '}
       <div className="relative group">
         <div
           onClick={togglePopupsActive}
-          className="hover:cursor-pointer ml-1 md:mb-2 w-24"
-        >
+          className="hover:cursor-pointer ml-1 md:mb-2 w-24">
           <span className="text-orange-600 border-dashed font-normal border-b border-b-orange-600 ">
             {sortData.name}
           </span>
@@ -61,17 +64,19 @@ const Sort = (props) => {
 
         {isActivePopup && (
           <ul className="bg-white overflow-hidden absolute cursor-pointer right-0 top-7 py-2 shadow rounded-lg font-normal text-sm w-32 z-10">
-            {categoriesForSort.map((item, iter) => (
-              <li
-                key={item.name}
-                onClick={() => onSelectItem(categoriesForSort[iter])}
-                className={`hover:bg-orange-600 hover:bg-opacity-5 px-2 py-2 ${stylesCurrentSortItem(
-                  item.name
-                )}`}
-              >
-                {item.name}
-              </li>
-            ))}
+            {categoriesForSort.map(
+              (item, iter: number) =>
+                item.name && (
+                  <li
+                    key={item.name}
+                    onClick={() => onSelectItem(categoriesForSort[iter])}
+                    className={`hover:bg-orange-600 hover:bg-opacity-5 px-2 py-2 ${stylesCurrentSortItem(
+                      item.name
+                    )}`}>
+                    {item.name}
+                  </li>
+                )
+            )}
           </ul>
         )}
       </div>

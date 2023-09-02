@@ -1,5 +1,4 @@
-import React from 'react';
-import testIcon from '../images/AsiaCrev.png';
+import React, { FC } from 'react';
 import Counter from './UI/Counter';
 import { useDispatch } from 'react-redux';
 import {
@@ -7,7 +6,25 @@ import {
   increaseCountItem,
 } from '../redux/slices/cartSlice';
 
-const ProductInCart = ({ title, price, id, imageUrl, type, size, count }) => {
+interface IProductInCartProps {
+  title: string;
+  price: number;
+  id: number;
+  imageUrl: string;
+  type?: string;
+  size?: string;
+  count: number;
+}
+
+const ProductInCart: FC<IProductInCartProps> = ({
+  title,
+  price,
+  id,
+  imageUrl,
+  type,
+  size,
+  count,
+}) => {
   const dispatch = useDispatch();
   const decrease = () => dispatch(decreaseCountItem(id));
   const increase = () => dispatch(increaseCountItem(id));
@@ -15,7 +32,7 @@ const ProductInCart = ({ title, price, id, imageUrl, type, size, count }) => {
   return (
     <div className="max-w-[820px] py-7 items-center border-t border-b flex-wrap justify-between md:flex gap-x-6 text-center">
       <div className="flex flex-wrap sm:gap-x-5 gap-x-4 grow">
-        <img src={imageUrl || testIcon} alt={title} className="w-20 h-20" />
+        <img src={imageUrl} alt={title} className="w-20 h-20" />
         <div className="self-center text-left">
           <p className="font-bold sm:text-xl text-lg">
             {title || 'Креветки по-азиатски'}

@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface IInitialState {
+  value: string;
+}
+
+const initialState: IInitialState = {
   value: '',
 };
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs'; // библиотека для парса адрессной строки
 import Sort from '../Sort';
-/* import Gallery from '../Gallery'; */ //TODO Перенести логику пицц и их загрузки в геллери
 import Header from '../Header';
 import Categories from '../Categories';
 import ProductCard from '../ProductCard/ProductCard';
@@ -11,16 +10,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPizzas } from '../../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router';
 import { setFilters } from '../../redux/slices/filterSlice';
+import { RootState } from '../../redux/store';
+import { IPizza } from '../interfaces/IPizza';
 
-const Main = (props) => {
+const Main: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const searchValue = useSelector((state) => state.search.value);
-  const { pizzaInfo, status } = useSelector((state) => state.pizzas);
+  const searchValue = useSelector((state: RootState) => state.search.value);
+  const { pizzaInfo, status } = useSelector((state: RootState) => state.pizzas);
   const { categoryId, sortData, sortOrder } = useSelector(
-    (state) => state.filter
+    (state: RootState) => state.filter
   );
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const Main = (props) => {
     <SceletonProductCard key={i} />
   ));
 
-  const pizzas = pizzaInfo.map((pizza) => (
+  const pizzas = pizzaInfo.map((pizza: IPizza) => (
     <ProductCard key={pizza.id} {...pizza} />
   ));
 
@@ -68,7 +69,7 @@ const Main = (props) => {
     const baseUrl = `https://6479a2f0a455e257fa6376cd.mockapi.io/items?`;
     const url = `${baseUrl}${sort}${category}${order}${search}`;
 
-    dispatch(fetchPizzas(url));
+    dispatch(fetchPizzas(url) as any); //!Поправить any
   }
 
   return (

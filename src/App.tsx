@@ -3,11 +3,11 @@ import Cart from './components/pages/Cart';
 import Main from './components/pages/Main';
 import NotFound404 from './components/pages/NotFound404';
 
-import styles from './App.module.css';
+import './App.css';
 
 function App() {
   return (
-    <div className={styles.app}>
+    <div className="app">
       <Routes>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/" element={<Main />} />

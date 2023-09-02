@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import Category from './UI/Category';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
+import { RootState } from '../redux/store';
 
 const Categories = () => {
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const categoryId = useSelector((state: RootState) => state.filter.categoryId);
   const dispatch = useDispatch();
 
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
 
-  function isActive(pos) {
+  function isActive(pos: number): boolean {
     return pos === categoryId;
   }
 
@@ -22,19 +23,20 @@ const Categories = () => {
     'Закрытые',
   ];
 
-  function changeCategory(id) {
+  function changeCategory(id: number): void {
     dispatch(setCategoryId(id));
   }
 
-  function toggleCategoryMenu(pos) {
+  function toggleCategoryMenu(pos: number): void {
     setModalCategoryIsOpen(!modalCategoryIsOpen);
     changeCategory(pos);
   }
 
-  const categoryRef = useRef();
+  const categoryRef = useRef(null);
 
   useEffect(() => {
-    function closePopupOnClickOutside(event) {
+    function closePopupOnClickOutside(event: Event) {
+      if (!categoryRef.current) return;
       if (!event.composedPath().includes(categoryRef.current)) {
         setModalCategoryIsOpen(false);
       }
@@ -60,8 +62,7 @@ const Categories = () => {
       {
         <div
           className="px-3 py-2 overflow-hidden cursor-pointer relative w-36 text-white bg-black rounded-xl text-center lg:hidden"
-          onClick={() => setModalCategoryIsOpen(!modalCategoryIsOpen)}
-        >
+          onClick={() => setModalCategoryIsOpen(!modalCategoryIsOpen)}>
           {categoryList[categoryId]}
         </div>
       }
@@ -73,8 +74,7 @@ const Categories = () => {
               key={item}
               className={`px-3 py-2 cursor-pointer hover:bg-black hover:bg-opacity-20 ${
                 isActive(iter) && 'text-white bg-black '
-              }`}
-            >
+              }`}>
               {item}
             </li>
           ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const SceletonProductCard = (props) => {
+const SceletonProductCard = () => {
   return (
     <ContentLoader
       speed={2}
@@ -10,7 +10,7 @@ const SceletonProductCard = (props) => {
       viewBox="0 0 250 460"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
-      {...props}
+      /* {...props} */
     >
       <circle cx="120" cy="120" r="120" />
       <rect x="0" y="317" rx="10" ry="10" width="240" height="88" />

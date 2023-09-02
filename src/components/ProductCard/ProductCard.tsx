@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PizzaConfig from './PizzaConfig';
 import { addItem } from '../../redux/slices/cartSlice';
+import { IPizza } from '../interfaces/IPizza';
+import { RootState } from '../../redux/store';
 
-const ProductCard = ({
+const ProductCard: React.FC<IPizza> = ({
   imageUrl,
   title,
   price,
   id,
   types,
   sizes,
-  category,
-  rating,
 }) => {
   const typeName = ['тонкое', 'традиционное'];
-  const cartItem = useSelector((state) =>
+  const cartItem = useSelector((state: RootState) =>
     state.cart.items.find((obj) => id === obj.id)
   );
 
@@ -59,8 +59,7 @@ const ProductCard = ({
           <button
             type="button"
             onClick={onClickAdd}
-            className="border border-orange-600 text-orange-600 px-3 py-2 rounded-full hover:bg-orange-600 hover:text-white group"
-          >
+            className="border border-orange-600 text-orange-600 px-3 py-2 rounded-full hover:bg-orange-600 hover:text-white group">
             + Добавить
             {cartItem && (
               <span className="inline-flex items-center justify-center w-6 h-6 ml-1 border rounded-full border-orange-600 text-white bg-orange-600 group-hover:border-white">

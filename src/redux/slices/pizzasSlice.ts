@@ -1,15 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { IPizza } from '../../components/interfaces/IPizza';
 
-const initialState = {
+interface IInitialState {
+  pizzaInfo: IPizza[] | [];
+  status: string;
+}
+
+const initialState: IInitialState = {
   pizzaInfo: [],
   status: 'loading', // loading | success | error
 };
 
 export const fetchPizzas = createAsyncThunk(
   `pizza/fetchPizzasStatus`,
-  async (url) => {
-    const { data } = await axios.get(url);
+  async (url: string) => {
+    const { data } = await axios.get<IPizza[]>(url);
     return data;
   }
 );
