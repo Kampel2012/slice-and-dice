@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 interface PizzaConfigOptionProps {
-  onChange: any; //!
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: number;
   isActive: boolean;
   name: string;

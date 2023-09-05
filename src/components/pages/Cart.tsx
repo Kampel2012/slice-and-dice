@@ -5,14 +5,13 @@ import shoppingCartIcon from '../../images/shopping-cart-black.svg';
 import trashIcon from '../../images/trash-icon-white.svg';
 import ProductInCart from '../ProductInCart';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { clearItems } from '../../redux/slices/cartSlice';
-import { RootState } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const Cart: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
 
   const pizzas = items.map((item) => <ProductInCart key={item.id} {...item} />);
 

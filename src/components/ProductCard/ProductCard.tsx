@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import PizzaConfig from './PizzaConfig';
 import { addItem } from '../../redux/slices/cartSlice';
 import { IPizza } from '../interfaces/IPizza';
-import { RootState } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const ProductCard: React.FC<IPizza> = ({
   imageUrl,
@@ -14,7 +13,7 @@ const ProductCard: React.FC<IPizza> = ({
   sizes,
 }) => {
   const typeName = ['тонкое', 'традиционное'];
-  const cartItem = useSelector((state: RootState) =>
+  const cartItem = useAppSelector((state) =>
     state.cart.items.find((obj) => id === obj.id)
   );
 
@@ -23,7 +22,7 @@ const ProductCard: React.FC<IPizza> = ({
     size: sizes[0],
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClickAdd = () => {
     const item = {

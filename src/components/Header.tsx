@@ -3,15 +3,14 @@ import headerLogo from '../images/logoHeader.png';
 import cartLogo from '../images/shopping-cart.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Search from './Search';
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { useAppSelector } from './hooks/reduxHooks';
 
 const Header: FC = () => {
   const location = useLocation();
   const isACart = location.pathname === '/cart';
 
   const navigate = useNavigate();
-  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
   const quantityOfPizzas = items.reduce((sum, item) => sum + item.count, 0);
 
   function onClickCart() {

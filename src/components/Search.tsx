@@ -1,12 +1,11 @@
 import React, { ChangeEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { changeSearchValue } from '../redux/slices/searchSlice';
 import useDebounce from './hooks/useDebounce';
-import { RootState } from '../redux/store';
+import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 
 const Search = () => {
-  const searchValue = useSelector((state: RootState) => state.search.value);
-  const dispatch = useDispatch();
+  const searchValue = useAppSelector((state) => state.search.value);
+  const dispatch = useAppDispatch();
 
   const debounceSetSearchValue = useDebounce(
     (e: ChangeEvent<HTMLInputElement>) => {

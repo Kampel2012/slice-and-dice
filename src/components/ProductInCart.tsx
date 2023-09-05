@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import Counter from './UI/Counter';
-import { useDispatch } from 'react-redux';
 import {
   decreaseCountItem,
   increaseCountItem,
 } from '../redux/slices/cartSlice';
+import { useAppDispatch } from './hooks/reduxHooks';
 
 interface IProductInCartProps {
   title: string;
@@ -25,7 +25,7 @@ const ProductInCart: FC<IProductInCartProps> = ({
   size,
   count,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const decrease = () => dispatch(decreaseCountItem(id));
   const increase = () => dispatch(increaseCountItem(id));
 

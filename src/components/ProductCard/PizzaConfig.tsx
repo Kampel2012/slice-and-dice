@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import PizzaConfigOption from './PizzaConfigOption';
 
 interface IConfig {
@@ -75,7 +75,7 @@ const PizzaConfig: FC<IProps> = ({
       </div>
 
       <div className={classesSize}>
-        {sizes.map((item, iter) => (
+        {sizes.map((item) => (
           <PizzaConfigOption
             isActive={isActiveSize(item)}
             size={item}

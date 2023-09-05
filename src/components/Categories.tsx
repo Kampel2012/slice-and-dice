@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Category from './UI/Category';
-import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
-import { RootState } from '../redux/store';
+import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 
 const Categories = () => {
-  const categoryId = useSelector((state: RootState) => state.filter.categoryId);
-  const dispatch = useDispatch();
+  const categoryId = useAppSelector((state) => state.filter.categoryId);
+  const dispatch = useAppDispatch();
 
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
 

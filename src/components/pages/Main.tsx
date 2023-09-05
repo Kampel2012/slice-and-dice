@@ -6,22 +6,21 @@ import Categories from '../Categories';
 import ProductCard from '../ProductCard/ProductCard';
 import SceletonProductCard from '../ProductCard/SceletonProductCard';
 import NoPizza from '../NoPizza';
-import { useSelector, useDispatch } from 'react-redux';
 import { fetchPizzas } from '../../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router';
 import { setFilters } from '../../redux/slices/filterSlice';
-import { RootState } from '../../redux/store';
 import { IPizza } from '../interfaces/IPizza';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const Main: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const searchValue = useSelector((state: RootState) => state.search.value);
-  const { pizzaInfo, status } = useSelector((state: RootState) => state.pizzas);
-  const { categoryId, sortData, sortOrder } = useSelector(
-    (state: RootState) => state.filter
+  const searchValue = useAppSelector((state) => state.search.value);
+  const { pizzaInfo, status } = useAppSelector((state) => state.pizzas);
+  const { categoryId, sortData, sortOrder } = useAppSelector(
+    (state) => state.filter
   );
 
   useEffect(() => {
@@ -48,7 +47,6 @@ const Main: React.FC = () => {
     if (!isSearch.current) {
       getInitialPizzas();
     }
-
     isSearch.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sortData, sortOrder, searchValue, dispatch]);
@@ -69,7 +67,7 @@ const Main: React.FC = () => {
     const baseUrl = `https://6479a2f0a455e257fa6376cd.mockapi.io/items?`;
     const url = `${baseUrl}${sort}${category}${order}${search}`;
 
-    dispatch(fetchPizzas(url) as any); //!Поправить any
+    dispatch(fetchPizzas(url));
   }
 
   return (

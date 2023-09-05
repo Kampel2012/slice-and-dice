@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   ICategory,
   setSortData,
   setSortOrder,
 } from '../redux/slices/filterSlice';
-import { RootState } from '../redux/store';
+import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 
 const Sort = () => {
-  const { sortData, sortOrder, categoriesForSort } = useSelector(
-    (state: RootState) => state.filter
+  const { sortData, sortOrder, categoriesForSort } = useAppSelector(
+    (state) => state.filter
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isActivePopup, setIsActivePopup] = useState(false);
   const sortRef = useRef(null);
 
