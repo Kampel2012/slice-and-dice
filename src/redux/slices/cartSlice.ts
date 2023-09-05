@@ -1,14 +1,22 @@
 //TODO релизовать логику корзины
-import { createSlice } from '@reduxjs/toolkit';
-import { IPizza } from '../../components/interfaces/IPizza';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface IPizzaInCart extends IPizza {
+interface IPizzaInCart {
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
+  type: string;
+  size: number;
+}
+
+interface IPizzaInCartWithCount extends IPizzaInCart {
   count: number;
 }
 
 interface IInitialState {
   totalPrice: number;
-  items: IPizzaInCart[];
+  items: IPizzaInCartWithCount[];
 }
 
 const initialState: IInitialState = {
@@ -27,7 +35,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action) => {
+    addItem: (state, action: PayloadAction<IPizzaInCart>) => {
       const findItem = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
@@ -39,7 +47,7 @@ export const cartSlice = createSlice({
       }
       recalculateTotalPrice(state);
     },
-    removeItem: (state, action) => {
+    removeItem: (state, action: PayloadAction<number>) => {
       state.items.filter((obj) => obj.id !== action.payload);
       recalculateTotalPrice(state);
     },
@@ -47,7 +55,7 @@ export const cartSlice = createSlice({
       state.items = [];
       recalculateTotalPrice(state);
     },
-    decreaseCountItem: (state, action) => {
+    decreaseCountItem: (state, action: PayloadAction<number>) => {
       const findItem = state.items.find((obj) => obj.id === action.payload);
       if (!findItem) return;
       if (findItem.count <= 1) {
@@ -56,7 +64,7 @@ export const cartSlice = createSlice({
       findItem.count--;
       recalculateTotalPrice(state);
     },
-    increaseCountItem: (state, action) => {
+    increaseCountItem: (state, action: PayloadAction<number>) => {
       const findItem = state.items.find((obj) => obj.id === action.payload);
       if (!findItem) return;
       findItem.count++;

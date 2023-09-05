@@ -1,15 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface ICategory {
   name?: string;
   sort?: string;
 }
 
+type TSortOrder = 'desc' | 'asc';
+
 interface IInitialState {
   categoryId: number;
   sortData: ICategory;
-  sortOrder: 'desc' | 'asc';
+  sortOrder: TSortOrder;
   categoriesForSort: ICategory[];
+}
+
+interface IFullSortAction {
+  category?: ICategory;
+  sortBy?: string;
+  order?: TSortOrder;
 }
 
 const initialState: IInitialState = {
@@ -30,23 +38,25 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategoryId: (state, action) => {
+    setCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
-    setSortData: (state, action) => {
+    setSortData: (state, action: PayloadAction<ICategory>) => {
       state.sortData = action.payload;
     },
-    setSortOrder: (state, action) => {
+    setSortOrder: (state, action: PayloadAction<TSortOrder>) => {
       state.sortOrder = action.payload;
     },
-    setFilters: (state, action) => {
+    setFilters: (state, action: PayloadAction<IFullSortAction>) => {
       state.categoryId = Number(action.payload.category);
       state.sortData = {
         ...state.categoriesForSort.find(
           (item) => item.sort === action.payload.sortBy
         ),
       };
-      state.sortOrder = action.payload.order;
+      if (action.payload.order) {
+        state.sortOrder = action.payload.order;
+      }
     },
   },
 });

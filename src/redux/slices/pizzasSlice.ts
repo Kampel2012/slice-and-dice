@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IPizza } from '../../components/interfaces/IPizza';
 
@@ -24,7 +24,7 @@ export const searchSlice = createSlice({
   name: 'pizzas',
   initialState,
   reducers: {
-    setPizzaInfo: (state, action) => {
+    setPizzaInfo: (state, action: PayloadAction<IPizza[]>) => {
       state.pizzaInfo = action.payload;
     },
   },

@@ -12,7 +12,7 @@ interface IProductInCartProps {
   id: number;
   imageUrl: string;
   type?: string;
-  size?: string;
+  size?: number;
   count: number;
 }
 
