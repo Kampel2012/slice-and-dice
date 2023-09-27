@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 interface CategoryProps {
   textBtn: string;
@@ -28,4 +28,4 @@ const Category: FC<CategoryProps> = ({
   );
 };
 
-export default Category;
+export default memo(Category);

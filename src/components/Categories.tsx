@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Category from './UI/Category';
 import { setCategoryId } from '../redux/slices/filterSlice';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 const Categories = () => {
   const categoryId = useAppSelector((state) => state.filter.categoryId);
   const dispatch = useAppDispatch();
-
   const [modalCategoryIsOpen, setModalCategoryIsOpen] = useState(false);
 
   function isActive(pos: number): boolean {
@@ -22,9 +21,12 @@ const Categories = () => {
     'Закрытые',
   ];
 
-  function changeCategory(id: number): void {
-    dispatch(setCategoryId(id));
-  }
+  const changeCategory = useCallback(
+    (id: number): void => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch]
+  );
 
   function toggleCategoryMenu(pos: number): void {
     setModalCategoryIsOpen(!modalCategoryIsOpen);
