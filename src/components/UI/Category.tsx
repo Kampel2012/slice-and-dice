@@ -1,6 +1,18 @@
-import React from 'react';
+import { FC } from 'react';
 
-const Category = ({ textBtn, isActive, changeCategory, id }) => {
+interface CategoryProps {
+  textBtn: string;
+  isActive: boolean;
+  changeCategory: (id: number) => void;
+  id: number;
+}
+
+const Category: FC<CategoryProps> = ({
+  textBtn,
+  isActive,
+  changeCategory,
+  id,
+}) => {
   function changeCategoryOnClick() {
     changeCategory(id);
   }
