@@ -1,11 +1,17 @@
 import { useCallback } from 'react';
 
-const useDebounce = (func, delay, options = '') => {
-  function debounce(func, delay) {
-    let timer;
-    return function () {
+type Options = string[] | string;
+
+const useDebounce = (
+  func: () => void,
+  delay: number,
+  options: Options = ''
+) => {
+  function debounce(func: () => void, delay: number) {
+    let timer: ReturnType<typeof setTimeout>;
+    return function (this: any) {
       const context = this;
-      const args = arguments;
+      const args: any = arguments;
 
       clearTimeout(timer);
 

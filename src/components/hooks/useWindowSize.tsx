@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useDebounce from './useDebounce';
 
-function useWindowSize(delay) {
+function useWindowSize(delay: number) {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
