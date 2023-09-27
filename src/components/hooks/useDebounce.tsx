@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 type Options = string[] | string;
 
 const useDebounce = (
-  func: () => void,
+  func: (...args: any) => void,
   delay: number,
   options: Options = ''
 ) => {
